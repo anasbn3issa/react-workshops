@@ -1,5 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
+import { Product } from './components/Product';
+import products from './products.json'
 
 function App() {
   const menu = (<div>
@@ -15,6 +17,13 @@ function App() {
         <div>
           {menu}
           <div>[Page content here]</div>
+          <div className="App">
+            {
+              products.map((produit,index) => {
+              return (<Product product={produit} key={index} />)
+            })
+            }
+          </div>
         </div>
       );
 }
