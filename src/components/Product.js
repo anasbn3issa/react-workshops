@@ -1,8 +1,14 @@
-import React, {Component } from 'react';
+import React, {useState } from 'react';
 import styled from 'styled-components';
 
-export class Product extends Component {
 
+function Product (props)  {
+
+  const [state, setState] = useState({
+    product: props.product,
+    likes: 0,
+  });
+/*
     constructor(props) {
         super(props);
         this.state = {
@@ -12,6 +18,7 @@ export class Product extends Component {
         }
         this.addLikes = this.addLikes.bind(this);
     }
+
 
     addLikes = () => {
         this.setState((OldState)=>{
@@ -33,32 +40,33 @@ export class Product extends Component {
         console.log('component destroyed');
     }
 
-    
-  render() {
+*/
+  //render() {
     return (
       <div>
         <ProductFrame>
             <ProductImageWrapper>
-                <ProductImage src={this.state.product.img}></ProductImage>
+                <ProductImage src={state.product.img}></ProductImage>
             </ProductImageWrapper>
             <ProductInfoWrapper>
-                <AppFrame>{this.state.product.name}</AppFrame>
+                <AppFrame>{state.product.name}</AppFrame>
             </ProductInfoWrapper>
 
             <ProductInfoWrapper>
-                <AppFrame>Prix : {this.state.product.price}</AppFrame>
+                <AppFrame>Prix : {state.product.price}</AppFrame>
             </ProductInfoWrapper>
 
-            <h3>Likes: {this.state.likes}</h3>
-            <button onClick={this.addLikes} >
+            <h3>Likes: {state.likes}</h3>
+            <button onClick={ () => setState({...state, likes: state.likes+1})}>
                 Like
             </button>
         </ProductFrame>
       </div>
     );
-  }
+  //}
 }
 
+export default Product;
 // ----- css du composant Product
 const ProductFrame = styled.div`
   border-radius: 25px;
