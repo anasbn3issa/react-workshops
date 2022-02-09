@@ -1,7 +1,8 @@
 import './App.css';
+import Home from './components/Home';
 import Product from './components/Product';
+import ProductDetails from './components/ProductDetails';
 import products from './products.json'
-
 function App() {
   const menu = (<div>
     <ul id="nav">
@@ -15,8 +16,9 @@ function App() {
       return (
         <div>
           {menu}
-          <div>[Page content h
-            ere]</div>
+          <div>[Page content here]</div>
+          <Home></Home>
+
           <div className="App">
             {
               products.map((produit,index) => {
