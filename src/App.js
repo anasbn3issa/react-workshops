@@ -1,33 +1,22 @@
-import './App.css';
-import Home from './components/Home';
-import Product from './components/Product';
-import ProductDetails from './components/ProductDetails';
-import products from './products.json'
-function App() {
-  const menu = (<div>
-    <ul id="nav">
-    <li><a href="#">Home</a></li>
-    <li><a href="#">About</a></li>
-    <li><a href="#">FAQ</a></li>
-    <li><a href="#">Contact</a></li>
-    </ul>
-    </div>
-    );
-      return (
-        <div>
-          {menu}
-          <div>[Page content here]</div>
-          <Home></Home>
+import "./App.css";
 
-          <div className="App">
-            {
-              products.map((produit,index) => {
-              return (<Product product={produit} key={index} />)
-            })
-            }
-          </div>
-        </div>
-      );
+import Header from "./components/Header";
+
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./components/Home";
+import Products from "./components/Products";
+function App() {
+  return (
+    <div>
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/products" element={<Products />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
 }
 
 export default App;

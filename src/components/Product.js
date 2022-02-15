@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 
 function Product (props)  {
-
+console.log("result===",props.product);
   const [state, setState] = useState({
     product: props.product,
     likes: 0,
@@ -23,7 +23,7 @@ function Product (props)  {
         <div>
           <ProductFrame>
               <ProductImageWrapper>
-                  <ProductImage src={state.product.img}></ProductImage>
+                <ProductImage src={state.product.img}></ProductImage>
               </ProductImageWrapper>
               <ProductInfoWrapper>
                   <AppFrame>{state.product.name}</AppFrame>
@@ -48,7 +48,7 @@ function Product (props)  {
         <div>
           <ProductFrameBest>
             <ProductImageWrapperBest>
-            <ProductImageBest src={state.product.img}></ProductImageBest>
+              <ProductImage src={state.product.img}></ProductImage>
           </ProductImageWrapperBest>
           <ProductInfoWrapperBest>
             <AppFrame>{state.product.name}</AppFrame>

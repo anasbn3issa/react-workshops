@@ -32,7 +32,7 @@ export default function ProductDetails(props) {
             </ProductFrame>
           </ContentBox>
 
-          <Button href="">Return to products</Button>
+          <Button onClick ={ () => props.history.replace("/products")}>Return to products</Button>
         </Container>
     );
 }
