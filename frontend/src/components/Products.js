@@ -1,9 +1,12 @@
  import products from '../products.json';
 import { useApi } from "../hooks/useApi";
 import Product from "./Product";
+import { queryApi } from '../utils/queryApi';
 export default function Products() {
   const [result, error, query] = useApi(`products`)
-  console.log("result:",result)
+  console.log("result:",result);
+
+ 
   return (
     <>
     {

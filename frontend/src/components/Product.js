@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useApi } from "../hooks/useApi";
+import { queryApi } from "../utils/queryApi";
 
 function Product(props) {
   //console.log("result===",props.product);
@@ -19,6 +20,9 @@ function Product(props) {
       best: state.likes >= 4 ? true : false,
     });
   };
+  async function deleteProduct(id) {
+    const [res,err] = await queryApi("product/"+id,"DELETE",false);
+  }
   //const [result,err] = useApi(`products`);
   //console.log("result===",result);
   if (!state.best) {
@@ -30,7 +34,7 @@ function Product(props) {
           </ProductImageWrapper>
           <ProductInfoWrapper>
             <AppFrame>
-              <Link to={`${state.product._id}`}>
+              <Link to={`/product/${state.product._id}`}>
                 <h2>{props.product.title}</h2>
               </Link>
             </AppFrame>
@@ -42,6 +46,7 @@ function Product(props) {
 
           <h3>Likes: {state.likes}</h3>
           <Button onClick={() => handleLikes()}>Like</Button>
+          <Button onClick={() => deleteProduct(state.product._id)}>Delete</Button>
         </ProductFrame>
       </div>
     );
@@ -60,6 +65,7 @@ function Product(props) {
           </ProductInfoWrapperBest>
           <h3>Likes: {state.likes}</h3>
           <Button onClick={() => handleLikes()}>Like</Button>
+          <Button onClick={() => deleteProduct(state.product._id)}>Delete</Button>
         </ProductFrameBest>
       </div>
     );

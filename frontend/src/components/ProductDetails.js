@@ -5,7 +5,7 @@ import { useApi } from "../hooks/useApi";
 
 export default function ProductDetails(props) {
 
-  const paramId = useParams();
+  const {paramId} = useParams();
   const [product,error,query]= useApi("product/"+paramId);
   console.log(product+"+++");
     return(
