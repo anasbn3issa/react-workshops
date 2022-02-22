@@ -1,54 +1,56 @@
-import React, {useRef, useState } from 'react';
-import styled from 'styled-components';
+import React, { useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { useApi } from "../hooks/useApi";
 
-
-function Product (props)  {
-console.log("result===",props.product);
+function Product(props) {
+  //console.log("result===",props.product);
   const [state, setState] = useState({
     product: props.product,
     likes: 0,
-    best: false
+    best: false,
   });
 
-  // function that handles likes , and set best on likes > 5 
+  // function that handles likes , and set best on likes > 5
   const handleLikes = () => {
-    setState({...state,
+    setState({
+      ...state,
       likes: state.likes + 1,
-      best: state.likes >= 4 ? true : false
+      best: state.likes >= 4 ? true : false,
     });
-  }
-  
-    if(!state.best) {
-      return (
-        <div>
-          <ProductFrame>
-              <ProductImageWrapper>
-                <ProductImage src={state.product.img}></ProductImage>
-              </ProductImageWrapper>
-              <ProductInfoWrapper>
-                  <AppFrame>{state.product.name}</AppFrame>
-              </ProductInfoWrapper>
-  
-              <ProductInfoWrapper>
-                  <AppFrame>Prix : {state.product.price}</AppFrame>
-              </ProductInfoWrapper>
-  
-              <h3>Likes: {state.likes}</h3>
-              <Button onClick={
-                 () => handleLikes() 
-                 
-            }>
-                  Like
-              </Button>
-          </ProductFrame>
-        </div>
-      );
-    } else {
-      return(
-        <div>
-          <ProductFrameBest>
-            <ProductImageWrapperBest>
-              <ProductImage src={state.product.img}></ProductImage>
+  };
+  //const [result,err] = useApi(`products`);
+  //console.log("result===",result);
+  if (!state.best) {
+    return (
+      <div>
+        <ProductFrame>
+          <ProductImageWrapper>
+            <ProductImage src={state.product.image}></ProductImage>
+          </ProductImageWrapper>
+          <ProductInfoWrapper>
+            <AppFrame>
+              <Link to={`${state.product._id}`}>
+                <h2>{props.product.title}</h2>
+              </Link>
+            </AppFrame>
+          </ProductInfoWrapper>
+
+          <ProductInfoWrapper>
+            <AppFrame>Prix : {state.product.price}</AppFrame>
+          </ProductInfoWrapper>
+
+          <h3>Likes: {state.likes}</h3>
+          <Button onClick={() => handleLikes()}>Like</Button>
+        </ProductFrame>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <ProductFrameBest>
+          <ProductImageWrapperBest>
+            <ProductImage src={state.product.img}></ProductImage>
           </ProductImageWrapperBest>
           <ProductInfoWrapperBest>
             <AppFrame>{state.product.name}</AppFrame>
@@ -57,18 +59,12 @@ console.log("result===",props.product);
             <AppFrame>Prix : {state.product.price}</AppFrame>
           </ProductInfoWrapperBest>
           <h3>Likes: {state.likes}</h3>
-              <Button onClick={
-                 () => handleLikes()         
-            }>
-                  Like
-              </Button>
-          </ProductFrameBest>
-        </div>
-      );
-      
-     }
-    }
-    
+          <Button onClick={() => handleLikes()}>Like</Button>
+        </ProductFrameBest>
+      </div>
+    );
+  }
+}
 
 export default Product;
 // --- css du composant de la liste des produits -----
@@ -103,7 +99,6 @@ const ProductFrame = styled.div`
   margin: 10px;
   display: flex;
   flex-direction: column;
- 
 `;
 const ProductImageWrapper = styled.div`
   margin: 5px;
@@ -127,14 +122,16 @@ const ProductFrameBest = styled.div`
   border-radius: 25px;
   min-height: 200px;
   min-width: 200px;
-  background-color: #DB7093;
+  background-color: #db7093;
   margin: 10px;
   display: flex;
   flex-direction: column;
-  animation:  clignote 2s linear infinite;
-  @keyframes clignote {  
-  50% { opacity: 0.5; }
-}
+  animation: clignote 2s linear infinite;
+  @keyframes clignote {
+    50% {
+      opacity: 0.5;
+    }
+  }
 `;
 const ProductImageWrapperBest = styled.div`
   margin: 5px;
@@ -146,7 +143,7 @@ const ProductImageBest = styled.img`
   border-radius: 25px;
 `;
 const ProductInfoWrapperBest = styled.div`
-  color:white;
+  color: white;
   margin-top: auto;
   margin-bottom: 5px;
   display: flex;
@@ -157,8 +154,8 @@ const ProductInfoWrapperBest = styled.div`
 `;
 const Button = styled.button`
   /* Adapt the colors based on primary prop */
-  background: ${props => props.primary ? "palevioletred" : "white"};
-  color: ${props => props.primary ? "white" : "palevioletred"};
+  background: ${(props) => (props.primary ? "palevioletred" : "white")};
+  color: ${(props) => (props.primary ? "white" : "palevioletred")};
   font-size: 1.5em;
   margin: 1em;
   padding: 0.25em 1em;

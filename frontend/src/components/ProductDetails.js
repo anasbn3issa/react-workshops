@@ -1,31 +1,40 @@
 import React from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
+import { useApi } from "../hooks/useApi";
 
 export default function ProductDetails(props) {
+
+  const paramId = useParams();
+  const [product,error,query]= useApi("product/"+paramId);
+  console.log(product+"+++");
     return(
-        <Container>            
+      <>
+        {
+        product ? (
+          <Container>            
             <ContentBox>
                 <ProductFrame>
                     <Content1>
                         <ProductImageWrapper>
-                            <ProductImage src={props.product.img}></ProductImage>
+                            <ProductImage src={product.image}></ProductImage>
                         </ProductImageWrapper>
                     </Content1>
                     <Content2>
                         <ProductInfoWrapper>
-                            <h2>{props.product.name}</h2>
+                            <h2>{product.title}</h2>
                         </ProductInfoWrapper>
                         <ProductInfoWrapper>
                             <AppFrame>
                                 <p>Description :</p>
-                                {props.product.description}
+                                {product.description}
                                 </AppFrame>
                         </ProductInfoWrapper>
                         <ProductInfoWrapper>
-                            <AppFrame>Prix : {props.product.price}</AppFrame>
+                            <AppFrame>Prix : {product.price}</AppFrame>
                         </ProductInfoWrapper>
                         <ProductInfoWrapper>
-                            <AppFrame>Likes : {props.product.likes}</AppFrame>
+                            <AppFrame>Likes : {product.likes}</AppFrame>
                         </ProductInfoWrapper>
                     </Content2>
                     
@@ -34,6 +43,14 @@ export default function ProductDetails(props) {
 
           <Button onClick ={ () => props.history.replace("/products")}>Return to products</Button>
         </Container>
+        )
+        :
+        (
+          <h1>no product with this id ??????</h1>
+        )
+        }
+      </>
+        
     );
 }
 
